@@ -6,17 +6,26 @@ public class Main {
         No no = new No(10);
         Arvore arvore = new Arvore();
         arvore.raiz = no;
-        arvore.inserir(arvore.raiz, 5);
-        arvore.inserir(arvore.raiz, 15);
-        arvore.inserir(arvore.raiz, 16);
-        arvore.inserir(arvore.raiz, 7);
-        arvore.inserir(arvore.raiz, 3);
-        arvore.inserir(arvore.raiz, 14);
-        arvore.inserir(arvore.raiz, 9);
-        arvore.inserir(arvore.raiz, 9);
+        arvore.inserir(5);
+        arvore.inserir(15);
+        arvore.inserir(16);
+        arvore.inserir(7);
+        arvore.inserir(3);
+        arvore.inserir(14);
+        arvore.inserir(9);
+        arvore.inserir(23);
+        arvore.inserir(21);
 
+
+        //System.out.println(arvore.pre_ordem());
+        //System.out.println(arvore.raiz.altura);
+
+        arvore.remover(arvore.raiz, 9);
+
+        // if(arvore.ehCheia())
         System.out.println(arvore.pre_ordem());
 
+        System.out.println(arvore.raiz.qtdNosEsquerda);
         return;
     }
 }
