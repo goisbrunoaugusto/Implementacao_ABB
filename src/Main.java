@@ -12,10 +12,8 @@ public class Main {
         List<String> comandos;
         List<Integer> arvoreInteiros = new ArrayList<>();
 
-        arvoreInicial = lerElementos(
-                "C:\\Users\\bruno\\Downloads\\Faculdade\\EDB2\\Implementacao_ABB\\src\\elementos.txt");
-        comandos = lerComandos(
-                "C:\\Users\\bruno\\Downloads\\Faculdade\\EDB2\\Implementacao_ABB\\src\\comandos.txt");
+        arvoreInicial = lerElementos(args[0]);
+        comandos = lerComandos(args[1]);
 
         for (String i : arvoreInicial) {
             arvoreInteiros.add(Integer.parseInt(i));
@@ -38,7 +36,6 @@ public class Main {
                 argumento = separado[1];
             } catch (Exception e) {
             }
-            System.out.println(j);
             argumentoComando(comando, argumento, arvore);
         }
 
