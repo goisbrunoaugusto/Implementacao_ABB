@@ -12,26 +12,22 @@ public class Main {
         List<String> comandos;
         List<Integer> arvoreInteiros = new ArrayList<>();
 
-        arvoreInicial = lerArquivo(
+        arvoreInicial = lerElementos(
                 "C:\\Users\\bruno\\Downloads\\Faculdade\\EDB2\\Implementacao_ABB\\src\\elementos.txt");
-        comandos = lerArquivo(
+        comandos = lerComandos(
                 "C:\\Users\\bruno\\Downloads\\Faculdade\\EDB2\\Implementacao_ABB\\src\\comandos.txt");
 
-        for (String elemento : arvoreInicial) {
-            try {
-                // Tenta converter a string para inteiro e adiciona à lista
-                arvoreInteiros.add(Integer.parseInt(elemento));
-            } catch (NumberFormatException e) {
-                // Tratar exceção se a conversão não for bem-sucedida
-                System.err.println("Erro ao converter a string para inteiro: " + elemento);
-            }
+        for (String i : arvoreInicial) {
+            arvoreInteiros.add(Integer.parseInt(i));
         }
 
-        // for (String i : arvoreInicial) {
-        // arvoreInteiros.add(Integer.parseInt(i));
-        // }
+        Arvore arvore = new Arvore(arvoreInteiros.get(0));
 
-        Arvore arvore = new Arvore(arvoreInteiros.get(1));
+        for (Integer i : arvoreInteiros) {
+            if (i != arvore.raiz.conteudo) {
+                arvore.inserir(i);
+            }
+        }
 
         for (String j : comandos) {
             String[] separado = j.split(" ");
@@ -42,14 +38,32 @@ public class Main {
                 argumento = separado[1];
             } catch (Exception e) {
             }
-
+            System.out.println(j);
             argumentoComando(comando, argumento, arvore);
         }
 
         return;
     }
 
-    public static List<String> lerArquivo(String nome_do_arquivo) throws IOException {
+    public static List<String> lerComandos(String nome_do_arquivo) throws IOException {
+        File file = new File(nome_do_arquivo);
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+        String linha;
+        ArrayList<String> array_string = new ArrayList<>();
+
+        while ((linha = br.readLine()) != null) {
+            array_string.add(linha);
+        }
+
+        br.close();
+        fr.close();
+
+        return array_string;
+
+    }
+
+    public static List<String> lerElementos(String nome_do_arquivo) throws IOException {
 
         File file = new File(nome_do_arquivo);
         FileReader fr = new FileReader(file);
@@ -58,7 +72,13 @@ public class Main {
         List<String> array_string = new ArrayList<>();
 
         while ((linha = br.readLine()) != null) {
-            array_string.add(linha);
+            String[] palavras = linha.split("\\s+");
+
+            for (String palavra : palavras) {
+                if (!palavra.isEmpty()) {
+                    array_string.add(palavra);
+                }
+            }
         }
 
         br.close();
